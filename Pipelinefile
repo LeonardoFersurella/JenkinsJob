@@ -2,23 +2,32 @@ pipeline {
     agent any
 
     stages {
-        stage('Clona il Repository') {
+        stage('Fase 1') {
             steps {
-                // Clona il repository Git
-                git 'https://github.com/LeonardoFersurella/JenkinsJob.git'
+                // Esegui azioni di fase 1 qui
+                echo 'Esecuzione di azioni di fase 1...'
+            }
+        }
+
+        stage('Fase 2') {
+            steps {
+                // Esegui azioni di fase 2 qui
+                echo 'Esecuzione di azioni di fase 2...'
             }
         }
     }
 
     post {
         success {
-            // Esegui una semplice azione di successo
+            // Esegui azioni aggiuntive se la pipeline ha successo
             echo 'La pipeline è stata eseguita con successo!'
         }
 
         failure {
-            // Esegui azioni in caso di fallimento
+            // Esegui azioni aggiuntive se la pipeline fallisce
             echo 'La pipeline è fallita!'
         }
     }
+}
+
 }
