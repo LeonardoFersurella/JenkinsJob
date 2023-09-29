@@ -1,0 +1,45 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clona il Repository') {
+            steps {
+                // Clona il repository GitHub
+                git 'https://github.com/LeonardoFersurella/JenkinsJob.git'
+            }
+        }
+
+        stage('Compila il Codice') {
+            steps {
+                // Esegui qui i comandi per compilare il tuo codice
+                sh 'mvn clean install' // Un esempio con Maven
+            }
+        }
+
+        stage('Esegui i Test') {
+            steps {
+                // Esegui qui i tuoi test
+                sh 'mvn test' // Un esempio con Maven
+            }
+        }
+
+        stage('Distribuisci l\'Applicazione') {
+            steps {
+                // Esegui qui i comandi per distribuire l'applicazione
+                sh 'scp target/app.war user@server:/path/to/deployment/directory'
+            }
+        }
+    }
+
+    post {
+        success {
+            // Esegui azioni aggiuntive se la pipeline ha successo
+            echo 'La pipeline è stata eseguita con successo!'
+        }
+
+        failure {
+            // Esegui azioni aggiuntive se la pipeline fallisce
+            echo 'La pipeline è fallita!'
+        }
+    }
+}
